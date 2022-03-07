@@ -1,12 +1,95 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Home Page</title>
-</head>
-<body>
-    <h1>
-        HOME PAGE
-    </h1>
-</body>
-</html>
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<style>
+    img{
+    height: 350px
+    }
+</style>
+<script type="text/javascript">
+    var body = document.getElementsByTagName("body")[0]
+    body.classList.add("bg-black")
+    body.classList.add("bg-opacity-75")
+    body.classList.add("bg-blend-overlay")
+    document.body.style.background = "url('{% static 'images/netflix-home.jpg' %}')"
+</script>
+{% endblock %}
+{% block body %}
+<header class="text-white w-full grid place-items-center h-full">
+
+    <div class="p-20 text-center mb-10">
+        <h1 class="my-5 text-6xl">
+            Filmes e séries tudo em um só lugar.
+        </h1>
+        <h4 class="text-xl mb-3">
+            Assista onde quiser. Cancele quando quiser.
+        </h4>
+        <h4 class="text-xl mb-3">
+            Quer começar? Coloque o seu e-mail abaixo para acessar
+        </h4>
+        <div class="flex">
+            <div class="flex-auto">
+                <input class="p-3 mx-1 text-black focus:outline-0 w-full" placeholder="E-mail">
+            </div>
+            <div class="">
+                <button class="p-3 mx-1 text-white font-medium text-md bg-red-700 hover:bg-red-800">
+                Acessar >
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+<section class="bg-black border-y-8 border-neutral-800" style="height:500px">
+    <div class="container py-10 px-5 text-white grid grid-cols-2 place-items-center">
+        <div class="">
+            <h1>Aproveite na TV.</h1>
+            <h4>Assista em Smart TVs, PlayStation, Xbox, Chromecast, Apple TV, aparelhos de Blu-ray e outros dispositivos</h4>
+        </div>
+        <div>
+            <img class="" src="{% static 'images/tv.png'%}">
+        </div>
+    </div>
+</section>
+<section class="bg-black border-b-8 border-neutral-800" style="height:500px">
+    <div class="container py-10 px-5 text-white grid grid-cols-2 place-items-center">
+        <div>
+            <img src="{% static 'images/mobile.jpg'%}">
+        </div>
+        <div class="">
+            <h1>
+                Baixe séries para assistir offline.
+            </h1>
+            <h4>
+                Salve seus títulos favoritos e sempre tenha algo para assistir.
+            </h4>
+        </div>
+    </div>
+</section>
+<section class="bg-black border-b-8 border-neutral-800" style="height:500px">
+    <div class="container py-10 px-5 text-white grid grid-cols-2 place-items-center">
+        <div>
+            <h1>
+                Crie perfis para crianças.
+            </h1>
+            <h4>
+                Deixe as crianças se aventurarem com seus personagens favoritos em um espaço feito só para elas, sem pagar a mais por isso.
+            </h4>
+        </div>
+        <div class="mb-2">
+            <img src="{% static 'images/netflix-kid.png'%}">
+        </div>
+
+    </div>
+</section>
+<footer class="bg-black text-white grid grid-cols-2 place-items-center">
+    <div class="p-2">
+        <p>© Copyright 2022</p>
+    </div>
+    <div class="p-2">
+        <p>
+          Site feito em django
+        </p>
+    </div>
+</footer>
+
+{% endblock %}

@@ -15,6 +15,7 @@ class Filme(models.Model):
     categoria = models.CharField(max_length=20, choices=LISTA_CATEGORIAS)
     visualizacoes = models.IntegerField(default=0)
     data_criacao = models.DateTimeField(default=timezone.now)
+    link = models.URLField(default="http://127.0.0.1:8000/")
 
     def __str__(self):
         return self.titulo
