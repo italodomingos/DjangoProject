@@ -7,17 +7,15 @@
 
 {% block body %}
 <main>
-    <section class="h-full text-white  bg-black bg-opacity-50 bg-blend-overlay" style="background-image: url('{{ filme_destaque.thumb.url }}'); background-size: 100% 100%;">
+    <section class="h-full text-white  bg-black bg-opacity-50 bg-blend-overlay" style="background-image: url('{{ object.thumb.url }}'); background-size: 100% 100%;">
         <div class="absolute bottom-0 left-0 container p-5">
             <h1 class="mb-10">
-
-                  {{ filme_destaque.titulo }}
-
+                {{ object.titulo }}
             </h1>
-            <h4 class=" mb-8">
-                {{ filme_destaque.descricao|slice:":100" }}...
+            <h4 class="mb-8">
+                {{ object.descricao|slice:":100" }}...
             </h4>
-            <a href="{% url 'filme:detalhesfilmes' filme_destaque.pk %}" style="text-decoration: none;"><button class="bg-white text-black flex items-center p-2 border-2 border-solid rounded">
+            <a href="{{ filme_destaque.link }}" style="text-decoration: none;"><button class="bg-white text-black flex items-center p-2 border-2 border-solid rounded">
                 <ion-icon name="play" class="text-2xl"></ion-icon>
                 <span class="ml-3">
                     Play
@@ -27,18 +25,43 @@
     </section>
 
     <section class='bg-primary_black flex justify-center py-10'>
+        <div class="p-8 w-10/12 relative text-white" >
+            <h2 class="mb-3">
+                Descrição
+            </h2>
+            <h5>{{ object.descricao }}</h5>
+            <h2 class="mt-5 mb-3">
+                Episódios
+            </h2>
+            {% for episodio in object.episodios.all %}
+            <a href="{{ episodio.url }}" style="text-decoration: none;">
+                <h5>
+                Episódio {{forloop.counter}}: {{ episodio }}
+                </h5>
+            </a>
+            {% endfor %}
+            <h2 class="mt-5 mb-3">
+                Visualizações
+            </h2>
+            <h5>
+                {{object.visualizacoes}}
+            </h5>
+        </div>
+    </section>
+
+    <section class='bg-primary_black flex justify-center py-10'>
             <div class="p-8 w-10/12 relative" >
                 <h2 class="text-gray-200 text-2xl font-medium">
-                    Novo
+                    Relacionados
                 </h2>
                 <div class="wrapper">
                   <section id="section1" class="flex flex-nowrap items-center justify-center space-x-8">
                     <a href="#section2" class="arrow__btn text-6xl page">‹</a>
-                      {% for filme_novo in filmes_novos %}
+                      {% for filme_relacionado in filmes_relacionados %}
                       {% if forloop.counter < 5 %}
                           <div class="item h-64 w-1/4 m-4">
-                              <a href="{% url 'filme:detalhesfilmes' filme_novo.pk %}">
-                                <img src="{{ filme_novo.thumb.url }}" class="rounded-md w-full h-full object-cover">
+                              <a href="{% url 'filme:detalhesfilmes' filme_relacionado.pk %}">
+                                <img src="{{ filme_relacionado.thumb.url }}" class="rounded-md w-full h-full object-cover">
                               </a>
                           </div>
                       {% endif %}
@@ -69,16 +92,16 @@
      <section class='bg-primary_black flex justify-center py-10'>
             <div class="p-8 w-10/12 relative" >
                 <h2 class="text-gray-200 text-2xl font-medium">
-                    Visto Recentemente
+                    Assistir Novamente
                 </h2>
                 <div class="wrapper">
                   <section id="section3" class="flex flex-nowrap items-center justify-center space-x-8">
                     <a href="#section4" class="arrow__btn text-6xl page" style="text-decoration: none;">‹</a>
-                      {% for filme_vistos in request.user.filmes_visto.all %}
+                      {% for filme_visto in request.user.filmes_visto.all %}
                       {% if forloop.counter < 5 %}
                           <div class="item h-64 w-1/4 m-4">
-                              <a href="{{ filme_vistos.link }}">
-                                <img src="{{ filme_vistos.thumb.url }}" class="rounded-md w-full h-full object-cover">
+                              <a href="{% url 'filme:detalhesfilmes' filme_visto.pk %}">
+                                <img src="{{ filme_visto.thumb.url }}" class="rounded-md w-full h-full object-cover">
 <!--                                <div class="rounded-md w-full h-full object-cover" style="background-image: url('{{ filme_novo.thumb.url }}'); background-size: 100% 100%;">-->
 <!--                                    teste-->
 <!--                                </div>-->
@@ -91,11 +114,11 @@
                 {% if filmes_novos|length > 4%}
                   <section id="section4" class="flex flex-nowrap items-center justify-center">
                       <a href="#section3" class="arrow__btn text-6xl">‹</a>
-                      {% for filme_novo in filmes_novos %}
+                      {% for filme_visto in request.user.filmes_visto.all %}
                       {% if forloop.counter > 4 %}
                           <div class="item h-64 w-1/4 m-4">
-                              <a href="{{ filme_novo.link }}">
-                                <img src="{{ filme_novo.thumb.url }}" class="rounded-md w-full h-full object-cover">
+                              <a href="{% url 'filme:detalhesfilmes' filme_visto.pk %}">
+                                <img src="{{ filme_visto.thumb.url }}" class="rounded-md w-full h-full object-cover">
                               </a>
                           </div>
                       {% endif %}

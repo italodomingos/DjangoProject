@@ -1,13 +1,27 @@
 {% load static %}
-<nav class="border-gray-200 px-2 sm:px-4 py-2.5">
+<nav class="border-gray-200 px-2 sm:px-4 py-2.5 fixed w-full">
   <div class="flex flex-wrap justify-between items-center mx-auto">
-  <a href="#" class="flex items-center">
+  <a href="/" class="flex items-center">
     <img src="{% static 'images/netflix-logo.png' %}" class="ml-5 mr-3 h-6 sm:h-10" alt="Netflix Logo" />
   </a>
   <div class="flex md:order-2">
-    <input type="text" id="email-adress-icon" class="mx-1 block p-2 text-gray-900 rounded-lg border border-gray-300 sm:text-sm focus:ring-blue-500 focus:border-blue-500" placeholder="Pesquisar...">
-    <button type="button" class="mx-1 text-white bg-red-700 hover:bg-red-800 focus:ring-1 focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center mr-3 md:mr-0">Login</button>
-    <button type="button" class="mx-1 text-white bg-red-700 hover:bg-red-800 focus:ring-1 focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center mr-3 md:mr-0">Editar Perfil</button>
-  </div>
+    {% if request.user.is_authenticated %}
+    <div>
+      <form method="get" action="{% url 'filme:pesquisafilme' %}">
+        <input type="text" id="email-adress-icon" class="mx-1 block p-2 text-gray-900 rounded-lg border border-gray-300 sm:text-sm focus:ring-blue-500 focus:border-blue-500" placeholder="Pesquisar..." name="query" value="{{request.GET.query}}">
+        <input type="submit" value="" class="">
+      </form>
+    </div>
+    <div>
+        <button type="button" class="mx-1 text-white bg-red-700 hover:bg-red-800 focus:ring-1 focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center">Editar Perfil</button>
+        <a href="{% url 'filme:logout' %}"><button type="button" class="mx-1 text-white bg-red-700 hover:bg-red-800 focus:ring-1 focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center">Logout</button></a>
+    </div>
+    </div>
+    {% else %}
+    <div>
+        <a href="{% url 'filme:login' %}"><button type="button" class="mx-1 text-white bg-red-700 hover:bg-red-800 focus:ring-1 focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center mr-3 md:mr-0">Login</button></a>
+    </div>
+    {% endif %}
+
   </div>
 </nav>

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+{% endblock%}
+
+{% block body %}
+<header class="flex items-center min-h-screen w-screen justify-center text-white bg-blend-overlay bg-opacity-75 bg-black" style="background-image: url('{% static 'images/netflix-home.jpg' %}')">
+    <div class="flex item-center text-white">
+        <h1>
+            Você saiu da sua conta
+        </h1>
+        <div>
+            <a href="{% url 'filme:login' %}"><button type="button" class="mx-1 text-white bg-red-700 hover:bg-red-800 focus:ring-1 focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center">Login</button></a>
+            <a href="{% url 'filme:criar_conta' %}"><button type="button" class="mx-1 text-white bg-red-700 hover:bg-red-800 focus:ring-1 focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center">Criar Conta</button></a>
+        </div>
+    </div>
+
+</header>
+
+{% endblock %}

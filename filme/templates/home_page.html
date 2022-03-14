@@ -27,16 +27,20 @@
         <h4 class="text-xl mb-3">
             Quer começar? Coloque o seu e-mail abaixo para acessar
         </h4>
-        <div class="flex">
+
+        <form class="flex" method="get" action="{% url 'filme:criar_conta' %}">
             <div class="flex-auto">
-                <input class="p-3 mx-1 text-black focus:outline-0 w-full" placeholder="E-mail">
+                <input class="p-3 mx-1 text-black focus:outline-0 w-full" placeholder="E-mail" name="query" value="{{request.GET.query}}">
             </div>
-            <div class="">
-                <button class="p-3 mx-1 text-white font-medium text-md bg-red-700 hover:bg-red-800">
+            <div>
+                <button class="p-3 mx-1 text-white font-medium text-md bg-red-700 hover:bg-red-800" >
                 Acessar >
                 </button>
             </div>
-        </div>
+
+        </form>
+
+
     </div>
 </header>
 <section class="bg-black border-y-8 border-neutral-800" style="height:500px">
