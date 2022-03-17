@@ -1,6 +1,6 @@
 from django.shortcuts import render, reverse
-from django.views.generic import TemplateView, DetailView, ListView, FormView
-from .models import Filme
+from django.views.generic import TemplateView, DetailView, ListView, FormView, UpdateView
+from .models import Filme, Usuario
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import CriarContaForm
 
@@ -50,8 +50,13 @@ class DetalhesFilmes(LoginRequiredMixin, DetailView):
         return context
 
 
-class EditarPerfil(LoginRequiredMixin, TemplateView):
+class EditarPerfil(LoginRequiredMixin, UpdateView):
     template_name = "editar_perfil.html"
+    model = Usuario
+    fields = ['first_name', 'last_name', 'email']
+
+    def get_success_url(self):
+        return reverse('filme:home_filmes')
 
 
 class CriarConta(FormView):

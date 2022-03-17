@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block head %}
+<script>
+</script>
+{% endblock %}
+{% block body %}
+<header class="flex items-center min-h-screen w-screen justify-center text-white bg-blend-overlay bg-opacity-75 bg-black" style="background-image: url('{% static 'images/netflix-home.jpg' %}')">
+    <div class="text-center w-80">
+        <form method="post">
+            {% csrf_token %}
+            <fieldset>
+                <legend class="text-4xl">
+                    Edite os campos abaixo para alterar seu perfil
+                </legend>
+                <hr>
+                {{ form|crispy }}
+            </fieldset>
+            <button type="submit" class="my-2 text-white bg-red-700 hover:bg-red-800 focus:ring-1 focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center">Editar Perfil</button>
+        </form>
+        <small>
+            Quer mudar sua senha?
+            <br>
+            <a href="{% url 'filme:mudar_senha' %}">Clique aqui para mudar a senha</a>
+        </small>
+    </div>
+
+</header>
+
+{% endblock %}

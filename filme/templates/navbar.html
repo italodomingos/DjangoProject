@@ -1,27 +1,27 @@
 {% load static %}
-<nav class="border-gray-200 px-2 sm:px-4 py-2.5 fixed w-full">
-  <div class="flex flex-wrap justify-between items-center mx-auto">
-  <a href="/" class="flex items-center">
-    <img src="{% static 'images/netflix-logo.png' %}" class="ml-5 mr-3 h-6 sm:h-10" alt="Netflix Logo" />
-  </a>
-  <div class="flex md:order-2">
+<nav class="flex justify-between items-center py-3 px-4 fixed w-full z-50 ">
+  <div class="w-6/12">
+    <a href="/" class="flex items-center">
+      <img src="{% static 'images/netflix-logo.png' %}" class="ml-5 mr-3 h-6 sm:h-10" alt="Netflix Logo" />
+    </a>
+  </div>
+  <div class="w-6/12 flex flex-nowrap justify-end">
     {% if request.user.is_authenticated %}
     <div>
-      <form method="get" action="{% url 'filme:pesquisafilme' %}">
-        <input type="text" id="email-adress-icon" class="mx-1 block p-2 text-gray-900 rounded-lg border border-gray-300 sm:text-sm focus:ring-blue-500 focus:border-blue-500" placeholder="Pesquisar..." name="query" value="{{request.GET.query}}">
-        <input type="submit" value="" class="">
+      <form method="get" action="{% url 'filme:pesquisa_filme' %}" class="">
+        <input type="text" id="email-adress-icon" class="mx-1 p-2 text-gray-900 rounded-lg border border-gray-300 sm:text-sm focus:ring-blue-500 focus:border-blue-500" placeholder="Pesquisar..." name="query" value="{{request.GET.query}}">
+        <input type="submit" value="">
       </form>
     </div>
-    <div>
-        <button type="button" class="mx-1 text-white bg-red-700 hover:bg-red-800 focus:ring-1 focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center">Editar Perfil</button>
-        <a href="{% url 'filme:logout' %}"><button type="button" class="mx-1 text-white bg-red-700 hover:bg-red-800 focus:ring-1 focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center">Logout</button></a>
-    </div>
+    <div class="flex-none">
+      <a href="{% url 'filme:editar_perfil' request.user.pk%}"><button type="button" class="mx-1 text-white bg-red-700 hover:bg-red-800 focus:ring-1 focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center">Editar Perfil</button></a>
+      <a href="{% url 'filme:logout' %}"><button type="button" class="mx-1 text-white bg-red-700 hover:bg-red-800 focus:ring-1 focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center">Logout</button></a>
     </div>
     {% else %}
-    <div>
-        <a href="{% url 'filme:login' %}"><button type="button" class="mx-1 text-white bg-red-700 hover:bg-red-800 focus:ring-1 focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center mr-3 md:mr-0">Login</button></a>
+    <div class="flex-none">
+      <a href="{% url 'filme:login' %}"><button type="button" class="mx-1 text-white bg-red-700 hover:bg-red-800 focus:ring-1 focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center mr-3 md:mr-0">Login</button></a>
     </div>
     {% endif %}
-
   </div>
 </nav>
+

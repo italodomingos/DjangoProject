@@ -10,6 +10,7 @@
 
     <section class='bg-primary_black flex justify-center py-10 items-center h-full'>
             <div class="p-8 w-10/12 relative" >
+                {% if pesquisa_filmes %}
                 <h2 class="text-gray-200 text-2xl font-medium">
                     Resultados encontrados:
                 </h2>
@@ -19,7 +20,7 @@
                       {% for resultado in pesquisa_filmes %}
                       {% if forloop.counter < 5 %}
                           <div class="item h-64 w-1/4 m-4">
-                              <a href="{% url 'filme:detalhesfilmes' resultado.pk %}">
+                              <a href="{% url 'filme:detalhes_filmes' resultado.pk %}">
                                 <img src="{{ resultado.thumb.url }}" class="rounded-md w-full h-full object-cover">
                               </a>
                           </div>
@@ -33,7 +34,7 @@
                       {% for resultado in pesquisa_filmes %}
                       {% if forloop.counter < 5 %}
                           <div class="item h-64 w-1/4 m-4">
-                              <a href="{% url 'filme:detalhesfilmes' resultado.pk %}">
+                              <a href="{% url 'filme:detalhes_filmes' resultado.pk %}">
                                 <img src="{{ resultado.thumb.url }}" class="rounded-md w-full h-full object-cover">
                               </a>
                           </div>
@@ -43,7 +44,11 @@
                   </section>
                 {% endif %}
                 </div>
-
+                {% else %}
+                <h2 class="text-gray-200 text-2xl font-medium flex flex-nowrap items-center justify-center space-x-8">
+                    Nenhum resultado foi encontrado
+                </h2>
+                {% endif %}
 
             </div>
     </section>
